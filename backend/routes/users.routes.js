@@ -1,40 +1,22 @@
 const express = require('express');
-const User = require('../models/user.model');
+const { getUsers, getUser, postSignUp, postLogIn, postUser, updateUser, getUsersCount, deleteUser } = require('../controllers/users.controller');
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    User.find()
-        .then((productList) => {
-            res.status(200).json(productList);
-        })
-        .catch((err)=>{
-            res.status(500).json({
-                Error: err,
-                Success: false
-            })
-        })
-})
+router.get("/", getUsers);
 
-router.post('/', (req, res) => {
-    var { name, nickName, image, countInStock } = req.body;
-    var user = new User({
-        name,
-        nickName,
-        image,
-        countInStock
-    })
+router.get('/:id', getUser);
 
-    user.save()
-        .then((createdProduct) => {
-            res.status(201).json(createdProduct);
-        })
-        .catch((err) => {
-            res.status(500).json({
-                Error: err,
-                Success: false
-            });
-        })
-})
+router.get('/get/count', getUsersCount);
+
+router.post('/', postUser);
+
+router.put('/:id', updateUser);
+
+router.delete('/:id', deleteUser)
+
+router.post('/signup', postSignUp);
+
+router.post('/login', postLogIn);
 
 module.exports = router;
