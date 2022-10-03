@@ -1,5 +1,8 @@
+
 const express = require('express');
-const { getProducts, postProducts, getProduct, updateProduct, deleteProduct, getProductsCount, getFeaturedProducts } = require('../controllers/products.controller');
+const { getProducts, postProducts, getProduct, updateProduct, deleteProduct, getProductsCount, getFeaturedProducts, updateProductGallery } = require('../controllers/products.controller');
+const { uploadSingleImage, uploadMultipleImages } = require('../middlewares/uploadImage.middleware');
+
 
 const router = express.Router();
 
@@ -11,9 +14,11 @@ router.get('/get/count', getProductsCount);
 
 router.get('/get/featured/:id', getFeaturedProducts);
 
-router.post('/', postProducts);
+router.post('/', uploadSingleImage, postProducts);
 
 router.put('/:id', updateProduct);
+
+router.put('/gallery/update/:id', uploadMultipleImages, updateProductGallery);
 
 router.delete('/:id', deleteProduct);
 

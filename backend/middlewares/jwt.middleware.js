@@ -10,6 +10,9 @@ function isPublicRoute(req, api) {
     if (req.originalUrl.match(/\/api\/v1\/categories(.*)/) && req.method === 'GET') {
         return true;
     }
+    if (req.originalUrl.match(/public\/uploads(.*)/) && req.method === 'GET') {
+        return true;
+    }
     else {
         return false;
     }

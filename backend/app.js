@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
 app.use(jwtAuthentication);
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 app.use(errorHandling);
 
 
