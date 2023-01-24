@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     swiper: {
         width: width,
         alignItems: "center",
-        marginTop: 10,
+        marginTop: 20,
     },
     imageBanner: {
         height: width / 2,
