@@ -14,7 +14,7 @@ const productsCategories = require('../../assets/data/094 categories.json');
 
 var { width, height } = Dimensions.get("window");
 
-const ProductContainer = () => {
+const ProductContainer = (props) => {
 
     const [products, setProducts] = useState([]);
     const [productsFiltered, setProductsFiltered] = useState([]);
@@ -70,12 +70,13 @@ const ProductContainer = () => {
 
     return (
         <View>
-            <VStack w="100%" space={5} alignSelf="center">
+            <VStack w="95%" space={5} alignSelf="center" marginBottom={2} marginTop={2} >
 
                 <Input
+                    borderRadius={20}
                     backgroundColor={'gray.100'}
                     placeholder="Search Products"
-                    width="90%"
+                    width="100%"
                     InputLeftElement={<Icon as={MaterialIcons} name="search" size='2xl' />}
                     InputRightElement={focus == true ? <Icon onPress={onBlur} as={MaterialIcons} name="cancel" size='2xl' /> : null}
                     onFocus={openList}
@@ -86,6 +87,7 @@ const ProductContainer = () => {
             {focus == true ? (
                 <View>
                     <SearchedProduct
+                        navigation={props.navigation}
                         productsFiltered={productsFiltered}
                     />
                 </View>
@@ -110,6 +112,7 @@ const ProductContainer = () => {
                                 {productsCtg.map((item) => {
                                     return (
                                         <ProductList
+                                            navigation={props.navigation}
                                             key={item.name}
                                             item={item}
                                         />
