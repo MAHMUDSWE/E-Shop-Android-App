@@ -20,7 +20,7 @@ const Banner = () => {
     }, []);
 
     return (
-        <ScrollView>
+        <ScrollView >
             <View style={styles.container}>
                 <View style={styles.swiper}>
                     <Swiper

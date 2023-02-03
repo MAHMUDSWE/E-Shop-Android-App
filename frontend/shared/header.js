@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
         alignContent: "center",
         justifyContent: "center",
         padding: 20,
-        marginTop: 150,
+        marginTop: 20,
+        marginBottom:-10
         // backgroundColor: 'green'
     }
 })

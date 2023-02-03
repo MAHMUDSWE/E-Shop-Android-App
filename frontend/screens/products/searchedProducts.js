@@ -1,6 +1,6 @@
 import { Container, HStack, Text, VStack } from 'native-base';
 import React from 'react';
-import { Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 var { width } = Dimensions.get("window")
 
@@ -10,26 +10,33 @@ const SearchedProduct = (props) => {
         <Container style={{ width: width }}>
             {productsFiltered.length > 0 ? (
                 productsFiltered.map((item) => (
-                    <ScrollView
-                        key={item._id.$oid}
-                        avatar
-                    >
-                        <HStack>
-                            <Image
-                                style={styles.image}
-                                resizeMode='contain'
-                                source={{
-                                    uri: item.image ?
-                                        item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
-                                }}
-                            />
-                            <VStack>
-                                <Text>{item.name}</Text>
-                                <Text note>{item.description}</Text>
-                            </VStack>
-                        </HStack>
+                        <TouchableOpacity
+                            style={{ width: '100%' }}
+                            onPress={() => {
+                                props.navigation.navigate("Product Detail", { item: item })
+                            }}>
+                            <ScrollView
+                                key={item._id.$oid}
+                                avatar
+                            >
+                                <HStack>
+                                    <Image
+                                        style={styles.image}
+                                        resizeMode='contain'
+                                        source={{
+                                            uri: item.image ?
+                                                item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
+                                        }}
+                                    />
+                                    <VStack>
+                                        <Text>{item.name}</Text>
+                                        <Text note>{item.description}</Text>
+                                    </VStack>
+                                </HStack>
 
-                    </ScrollView>
+                            </ScrollView>
+                        </TouchableOpacity>
+
                 ))
             ) : (
                 <View style={styles.center}>

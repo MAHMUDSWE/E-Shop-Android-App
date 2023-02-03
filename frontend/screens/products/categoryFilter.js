@@ -7,7 +7,7 @@ const CategoryFilter = (props) => {
         <ScrollView
             bounces={true}
             horizontal={true}
-            style={{ backgroundColor: '#f2f2f2', marginBottom: -350 }}
+            style={{ backgroundColor: '#f2f2f2', marginBottom: -370 }}
         >
             <HStack style={{ margin: 0, padding: 0, borderRadius: 0 }}>
 
