@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View } from "react-native";
+import React from "react";
+
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import HomeNavigator from "./HomeNavigator";
@@ -14,7 +14,7 @@ const Main = () => {
             tabBarOptions={{
                 keyboardHidesTabBar: true,
                 showLabel: false,
-                activeTintColorn: "#e91e63"
+                activeTintColor: "#e91e63"
             }}
         >
             <Tab.Screen
@@ -22,7 +22,7 @@ const Main = () => {
                 component={HomeNavigator}
                 options={{
                     headerShown: false,
-                    tabBatIcon: ({ color }) => (
+                    tabBarIcon: ({ color }) => (
                         <Icon
                             name="home"
                             style={{ position: "relative" }}
@@ -37,9 +37,9 @@ const Main = () => {
                 component={HomeNavigator}
                 options={{
                     headerShown: false,
-                    tabBatIcon: ({ color }) => (
+                    tabBarIcon: ({ color }) => (
                         <Icon
-                            name="shoping-cart"
+                            name="shopping-cart"
                             style={{ position: "relative" }}
                             color={color}
                             size={30}
@@ -52,7 +52,7 @@ const Main = () => {
                 component={HomeNavigator}
                 options={{
                     headerShown: false,
-                    tabBatIcon: ({ color }) => (
+                    tabBarIcon: ({ color }) => (
                         <Icon
                             name="cog"
                             color={color}
@@ -66,7 +66,7 @@ const Main = () => {
                 component={HomeNavigator}
                 options={{
                     headerShown: false,
-                    tabBatIcon: ({ color }) => (
+                    tabBarIcon: ({ color }) => (
                         <Icon
                             name="user"
                             color={color}

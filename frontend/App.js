@@ -1,23 +1,30 @@
-import { NativeBaseProvider, extendTheme } from 'native-base';
+import { NavigationContainer } from '@react-navigation/native';
+import { extendTheme, NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { LogBox } from 'react-native';
-import { SafeAreaProvider, View } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
 
+// Redux
+import { Provider } from 'react-redux';
+import store from './Redux/store';
+
+// Navigators
 import Main from './Navigators/Main';
-import ProductContainer from './screens/products/productContainer';
+
+//Screens
 import HeaderBar from './shared/header';
 
 LogBox.ignoreAllLogs(true);
 
 export default function App() {
   return (
-    <NativeBaseProvider theme={theme}>
-      <NavigationContainer>
-            <HeaderBar />
-            <Main />
-      </NavigationContainer>
-    </NativeBaseProvider>
+    <Provider store={store}>
+      <NativeBaseProvider theme={theme}>
+        <NavigationContainer>
+          <HeaderBar />
+          <Main />
+        </NavigationContainer>
+      </NativeBaseProvider>
+    </Provider>
   );
 }
 
