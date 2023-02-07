@@ -10,7 +10,7 @@ import SearchedProduct from "./searchedProducts";
 
 
 const data = require('../../assets/data/products.json');
-const productsCategories = require('../../assets/data/094 categories.json');
+const productsCategories = require('../../assets/data/categories.json');
 
 var { width, height } = Dimensions.get("window");
 
@@ -85,12 +85,12 @@ const ProductContainer = (props) => {
             </VStack>
 
             {focus == true ? (
-                <View>
+                <ScrollView>
                     <SearchedProduct
                         navigation={props.navigation}
                         productsFiltered={productsFiltered}
                     />
-                </View>
+                </ScrollView>
             ) : (
 
                 <ScrollView>
@@ -113,7 +113,7 @@ const ProductContainer = (props) => {
                                     return (
                                         <ProductList
                                             navigation={props.navigation}
-                                            key={item.name}
+                                            key={item._id.$oid}
                                             item={item}
                                         />
                                     )

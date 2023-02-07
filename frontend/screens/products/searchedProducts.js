@@ -7,19 +7,21 @@ var { width } = Dimensions.get("window")
 const SearchedProduct = (props) => {
     const { productsFiltered } = props;
     return (
-        <Container style={{ width: width }}>
+        < >
             {productsFiltered.length > 0 ? (
-                productsFiltered.map((item) => (
+                <Container style={styles.container}>
+                    {productsFiltered.map((item) => (
                         <TouchableOpacity
                             style={{ width: '100%' }}
                             onPress={() => {
                                 props.navigation.navigate("Product Detail", { item: item })
                             }}>
-                            <ScrollView
+                            <View
                                 key={item._id.$oid}
                                 avatar
+                                width={width}
                             >
-                                <HStack>
+                                <HStack style={styles.list}>
                                     <Image
                                         style={styles.image}
                                         resizeMode='contain'
@@ -28,16 +30,16 @@ const SearchedProduct = (props) => {
                                                 item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
                                         }}
                                     />
-                                    <VStack>
+                                    <VStack style={styles.body}>
                                         <Text>{item.name}</Text>
                                         <Text note>{item.description}</Text>
                                     </VStack>
                                 </HStack>
 
-                            </ScrollView>
+                            </View>
                         </TouchableOpacity>
-
-                ))
+                    ))}
+                </Container>
             ) : (
                 <View style={styles.center}>
                     <Text style={{ alignSelf: 'center' }}>
@@ -45,11 +47,21 @@ const SearchedProduct = (props) => {
                     </Text>
                 </View>
             )}
-        </Container>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        width: width
+    },
+    list: {
+        width: width,
+        marginLeft: 15,
+    },
+    body: {
+        margin: 10,
+    },
     center: {
         justifyContent: 'center',
         alignItems: 'center',
