@@ -1,11 +1,10 @@
 import {
-    Button, Container, Heading, HStack,
-    Text,
+    Button, Container, Heading, Text,
     VStack
 } from 'native-base';
-import React, { useState } from "react";
+import React from "react";
 import {
-    Dimensions, Image, StyleSheet, TouchableOpacity, View
+    Dimensions, StyleSheet, TouchableOpacity, View
 } from "react-native";
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -16,8 +15,6 @@ import { ScrollView } from "react-native";
 import { connect } from "react-redux";
 import * as actions from '../../Redux/Actions/cartActions';
 import CartItem from './CartItem';
-import { Swipeable } from 'react-native-gesture-handler';
-import Example from './test';
 
 var { height, width } = Dimensions.get("window");
 

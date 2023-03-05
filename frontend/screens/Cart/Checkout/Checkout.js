@@ -1,11 +1,10 @@
+import { Picker } from '@react-native-picker/picker';
 import React, { useEffect, useState } from 'react';
-import { Text, View, Button } from 'react-native';
-//import { Picker } from '@react-native-picker/picker';
-import { Item } from 'native-base';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FormContainer from '../../../shared/Form/FormContainer';
 import Input from '../../../shared/Form/Input';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { connect } from 'react-redux';
 
@@ -18,7 +17,7 @@ const Checkout = (props) => {
     const [address2, setAddress2] = useState();
     const [city, setCity] = useState();
     const [zip, setZip] = useState();
-    const [country, setCountry] = useState();
+    const [country, setCountry] = useState('');
     const [phone, setPhone] = useState();
 
     useEffect(() => {
@@ -57,6 +56,7 @@ const Checkout = (props) => {
         }
 
         props.navigation.navigate("Payment", { order: order })
+
     }
 
     return (
@@ -99,11 +99,16 @@ const Checkout = (props) => {
                     keyboardType={"numeric"}
                     onChangeText={(text) => setZip(text)}
                 />
-                {/* <Item picker>
+                <View style={styles.icon}>
+                    {country === '' && <Text style={{ color: 'gray' }}>
+                        Select your country <Icon name="arrow-down" color={"#007aff"} /></Text>}
+                </View>
+                <View style={styles.countryDropdown} picker>
+
                     <Picker
                         mode="dropdown"
                         iosIcon={<Icon name="arrow-down" color={"#007aff"} />}
-                        style={{ width: 100 }}
+                        style={{ width: 200 }}
                         selectedValue={country}
                         placeholder="Select your country"
                         placeholderStyle={{ color: '#007aff' }}
@@ -118,9 +123,10 @@ const Checkout = (props) => {
                             />
                         })}
                     </Picker>
-                </Item> */}
+                </View>
                 <View style={{ width: '80%', alignItems: "center" }}>
-                    <Button title="Confirm" onPress={() => checkOut()} />
+                    <Text>Press Payment and Slide to Payment</Text>
+                    <Button title="Payment" onPress={() => checkOut()} />
                 </View>
             </FormContainer>
         </KeyboardAwareScrollView>
@@ -135,5 +141,16 @@ const mapStateToProps = (state) => {
         cartItems: cartItems,
     }
 }
+
+const styles = StyleSheet.create({
+    countryDropdown: {
+        // width: "100%",
+        flexDirection: 'row',
+    },
+    icon: {
+        // alignItems: 'center',
+        // marginTop: 20
+    }
+})
 
 export default connect(mapStateToProps)(Checkout)
