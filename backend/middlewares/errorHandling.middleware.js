@@ -9,6 +9,7 @@ const errorHandling = (err, req, res, next) => {
         return res.status(401).json({
             message: "User is not authorized"
         });
+
     }
 
     if (err.name === 'ValidationError') {
