@@ -176,7 +176,6 @@ const deleteUser = (req, res) => {
 }
 
 const postSignUp = async (req, res) => {
-
     var { name, email, password, phone, isAdmin, street, apartment, zip, city, country } = req.body;
 
     const passwordHash = await bcrypt.hash(password, 10);
