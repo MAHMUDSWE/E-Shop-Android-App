@@ -1,10 +1,20 @@
 const jwt = require("jsonwebtoken");
 
 function isPublicRoute(req, api) {
-    if (req.originalUrl === (`${api}/users/login` || `${api}/users/signup`)) {
+    if (req.originalUrl === (`${api}/users/login`)) {
+        return true;
+    }
+    if (req.originalUrl === (`${api}/users/signup`)) {
+        return true;
+    }
+
+    if (req.originalUrl === (`${api}/users`)) {
         return true;
     }
     if (req.originalUrl.match(/\/api\/v1\/products(.*)/) && req.method === 'GET') {
+        return true;
+    }
+    if (req.originalUrl.match(/\/api\/v1\/products(.*)/) && req.method === 'POST') {
         return true;
     }
     if (req.originalUrl.match(/\/api\/v1\/categories(.*)/) && req.method === 'GET') {
@@ -40,7 +50,13 @@ const jwtAuthentication = (req, res, next) => {
 
             return next();
         }
+        // else if (!isAdmin && req.originalUrl.match(/\/api\/v1\/products(.*)/) && req.method === 'POST') {
+        //     return true;
+        // }
         else if (!isAdmin && req.originalUrl.match(/\/api\/v1\/users(.*)/) && req.method === ('DELETE')) {
+            return next();
+        }
+        else if (!isAdmin && req.originalUrl.match(/\/api\/v1\/users(.*)/) && req.method === ("GET")) {
             return next();
         }
 

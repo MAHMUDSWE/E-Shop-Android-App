@@ -9,10 +9,10 @@ const getProducts = (req, res) => {
     let filter = {};
 
     if (req.query.categories) {
-        filter = { categoryId: req.query.categories.split(',') };
+        filter = { category: req.query.categories.split(',') };
     }
 
-    Product.find(filter).select('name image id -_id _id')
+    Product.find(filter).populate('category')
         .then((productList) => {
             res.status(200).json(productList);
         })
@@ -27,7 +27,7 @@ const getProducts = (req, res) => {
 const getProduct = (req, res) => {
     var id = req.params.id;
 
-    Product.findById(id).populate('categoryId')
+    Product.findById(id).populate('category')
         .then((product) => {
             if (product) {
                 res.status(200).json({
@@ -105,7 +105,7 @@ const getFeaturedProducts = (req, res) => {
 
 const postProducts = async (req, res) => {
 
-    var { name, description, richDescription, brand, price, categoryId, countInStock, rating, numReviews, isFeatured } = req.body;
+    var { name, description, richDescription, brand, price, category, countInStock, rating, numReviews, isFeatured } = req.body;
 
     const file = req.file;
 
@@ -119,7 +119,7 @@ const postProducts = async (req, res) => {
     var imagePath = `${basePath}${fileName}`;
 
     try {
-        const category = await Category.findById(categoryId);
+        category = await Category.findById(category);
         if (!category) {
             return res.status(400).json({
                 Success: false,
@@ -140,7 +140,7 @@ const postProducts = async (req, res) => {
         image: imagePath,
         brand,
         price,
-        categoryId,
+        category,
         countInStock,
         rating,
         numReviews,

@@ -1,4 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
+
 import { extendTheme, NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { LogBox } from 'react-native';
@@ -6,6 +9,9 @@ import { LogBox } from 'react-native';
 // Redux
 import { Provider } from 'react-redux';
 import store from './Redux/store';
+
+//Context API
+import Auth from './Context/store/Auth';
 
 // Navigators
 import Main from './Navigators/Main';
@@ -17,14 +23,20 @@ LogBox.ignoreAllLogs(true);
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <NativeBaseProvider theme={theme}>
-        <NavigationContainer>
-          <HeaderBar />
-          <Main />
-        </NavigationContainer>
-      </NativeBaseProvider>
-    </Provider>
+    <Auth>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <NativeBaseProvider theme={theme}>
+            <NavigationContainer>
+              <HeaderBar />
+              <Main />
+              <Toast ref={(ref) => React.forwardRef(ref)} />
+            </NavigationContainer>
+          </NativeBaseProvider>
+        </Provider>
+      </SafeAreaProvider>
+    </Auth>
+
   );
 }
 

@@ -176,8 +176,10 @@ const deleteUser = (req, res) => {
 }
 
 const postSignUp = async (req, res) => {
+
     var { name, email, password, phone, isAdmin, street, apartment, zip, city, country } = req.body;
 
+    password = toString(password)
     const passwordHash = await bcrypt.hash(password, 10);
 
     var user = new User({
@@ -230,7 +232,7 @@ const postLogIn = async (req, res) => {
             Error: error
         })
     }
-
+    password = toString(password)
     if (user && bcrypt.compareSync(password, user.passwordHash)) {
 
         let jwtSecretKey = process.env.JWT_SECRET_KEY;

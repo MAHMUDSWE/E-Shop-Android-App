@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from "react";
+import React, { useContext } from "react";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -7,10 +7,14 @@ import HomeNavigator from "./HomeNavigator";
 import CartNavigator from "./CartNavigator";
 import { View } from "react-native";
 import CartIcon from "../shared/cartIcon";
+import UserNavigator from "./UserNavigator";
+import AdminNavigator from "./AdminNavigator";
+import AuthGlobal from "../Context/store/AuthGlobal";
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
+    const context = useContext(AuthGlobal)
     return (
         <Tab.Navigator
             initialRouteName="Home"
@@ -53,23 +57,27 @@ const Main = () => {
                     )
                 }}
             />
-            <Tab.Screen
-                name="Admin"
-                component={HomeNavigator}
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                            name="cog"
-                            color={color}
-                            size={30}
-                        />
-                    )
-                }}
-            />
+
+            {context.stateUser.user.isAdmin == true ? (
+                <Tab.Screen
+                    name="Admin"
+                    component={AdminNavigator}
+                    options={{
+                        headerShown: false,
+                        tabBarIcon: ({ color }) => (
+                            <Icon
+                                name="cog"
+                                color={color}
+                                size={30}
+                            />
+                        )
+                    }}
+                />
+            ) : null}
+
             <Tab.Screen
                 name="User"
-                component={HomeNavigator}
+                component={UserNavigator}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
