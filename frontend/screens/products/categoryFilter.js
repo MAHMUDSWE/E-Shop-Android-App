@@ -31,7 +31,6 @@ const CategoryFilter = (props) => {
                     <TouchableOpacity
                         key={item._id}
                         onPress={() => {
-                            console.log(props.categories)
                             props.CategoryFilter(item._id),
                                 props.setActive(props.categories.indexOf(item))
                         }}

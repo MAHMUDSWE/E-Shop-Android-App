@@ -25,7 +25,7 @@ const ProductContainer = (props) => {
     const [initialState, setInitialState] = useState([]);
     const [loading, setLoading] = useState(true);
 
- useFocusEffect((
+    useFocusEffect((
         useCallback(
             () => {
                 setFocus(false);
@@ -39,21 +39,20 @@ const ProductContainer = (props) => {
                         setProductsCtg(res.data);
                         setInitialState(res.data);
                         setLoading(false);
-                        
                     })
                     .catch((err) => {
-                        console.log("Product API call error",err)
+                        console.log("Product API call error")
                     })
 
                 // Category...
                 axios
                     .get(`${baseURL}categories`)
                     .then((res) => {
-                        setCategories(res.data)
-                        console.log(res.data)
+                        setCategories(res.data.categoryList)
+                        //console.log(res.data)
                     })
                     .catch((err) => {
-                        console.log(" Categories API call error",err)
+                        console.log(" Categories API call error", err)
                     })
 
                 return () => {
@@ -156,11 +155,12 @@ const ProductContainer = (props) => {
                     )}
                 </View>
             ) : (
-                <View style={[styles.center, { backgroundColor: "#f2f2f2" }]}>
+                <View style={[styles.center,styles.spinner, { backgroundColor: "#f2f2f2" }]}>
                     <ActivityIndicator size="large" color="red" />
                 </View>
             )}
         </>
+
     )
 }
 
@@ -189,7 +189,12 @@ const styles = StyleSheet.create({
     center: {
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    spinner: {
+        height: height / 2,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 })
 
 

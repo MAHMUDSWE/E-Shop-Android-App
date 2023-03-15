@@ -10,7 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { SwipeListView } from 'react-native-swipe-list-view';
-
+import EasyButton from '../../shared/StyledComponents/EasyButton';
 import { ScrollView } from "react-native";
 import { connect } from "react-redux";
 import * as actions from '../../Redux/Actions/cartActions';
@@ -41,7 +41,7 @@ const Cart = (props) => {
                     >
                         <SwipeListView
                             data={props.cartItems}
-                            keyExtractor={(data) => data.product._id.$oid.toString()}
+                            keyExtractor={(data) => data.product.toString()}
 
                             renderItem={({ item }) => (
                                 <View style={styles.cartItem}>
@@ -80,14 +80,22 @@ const Cart = (props) => {
 
                         <Text style={styles.price}>$ {total.toFixed(2)}</Text>
 
-                        <Button
+                        <EasyButton
+                            danger
+                            medium
                             onPress={() => props.clearCart()}
-                        >Clear</Button>
+                        >
+                            <Text style={{ color: "white" }}>Clear</Text>
+                        </EasyButton>
 
-                        <Button
-                            style={styles.checkout}
+                        <EasyButton
+                            primary
+                            medium
+                            // style={styles.checkout}
                             onPress={() => props.navigation.navigate('Checkout')}
-                        >Checkout</Button>
+                        >
+                            <Text style={{ color: "white" }}>Checkout</Text>
+                        </EasyButton>
 
                     </VStack>
 

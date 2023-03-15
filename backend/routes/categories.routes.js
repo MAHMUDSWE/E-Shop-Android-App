@@ -3,7 +3,7 @@ const { getCategories, postCategory, deleteCategory, getCategory, updateCategory
 
 const router = express.Router();
 
-router.get("/", getCategories);
+router.get('/', getCategories);
 
 router.get('/:id', getCategory)
 

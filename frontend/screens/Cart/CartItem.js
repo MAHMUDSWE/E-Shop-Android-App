@@ -14,6 +14,7 @@ import {
 var { height, width } = Dimensions.get("window");
 
 const CartItem = ({ item }) => {
+    console.log(item.product.name)
     item = item.product;
     return (
         <View
